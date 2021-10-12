@@ -1,0 +1,31 @@
+{
+    "doc": "https://github.com/thingsdb/module-go-requests#readme",
+    "version": "0.1.0",
+    "main": {
+        "linux/386": "bin/requests_linux_386.bin",
+        "linux/amd64": "bin/requests_linux_amd64.bin",
+        "linux/arm": "bin/requests_linux_arm.bin",
+        "linux/arm64": "bin/requests_linux_arm64.bin",
+        "freebsd/386": "bin/requests_freebsd_386.bin",
+        "freebsd/amd64": "bin/requests_freebsd_amd64.bin",
+        "freebsd/arm": "bin/requests_freebsd_arm.bin",
+        "freebsd/arm64": "bin/requests_freebsd_arm64.bin",
+        "darwin/amd64": "bin/requests_darwin_amd64.bin"
+    },
+    "exposes": {
+        "post": {
+            "doc": "Make a POST request",
+            "defaults": {
+                "method": "POST"
+            },
+            "argmap": ["url", "body", "*"]
+        },
+        "get": {
+            "doc": "Make a GET request",
+            "defaults": {
+                "method": "GET"
+            },
+            "argmap": ["url", "*"]
+        }
+    }
+}
