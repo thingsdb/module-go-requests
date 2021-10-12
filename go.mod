@@ -1,4 +1,4 @@
-module requests
+module github.com/thingsdb/module-go-requests
 
 go 1.17
 
