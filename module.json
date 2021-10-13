@@ -1,6 +1,6 @@
 {
     "doc": "https://github.com/thingsdb/module-go-requests#readme",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "main": {
         "linux/386": "bin/requests_linux_386.bin",
         "linux/amd64": "bin/requests_linux_amd64.bin",
@@ -20,10 +20,31 @@
             },
             "argmap": ["url", "body", "*"]
         },
+        "post_json": {
+            "doc": "Make a JSON POST request",
+            "defaults": {
+                "method": "POST",
+                "headers": [
+                    ["Accept", "application/json"],
+                    ["Content-type", "application/json"]
+                ]
+            },
+            "argmap": ["url", "body", "*"]
+        },
         "get": {
             "doc": "Make a GET request",
             "defaults": {
                 "method": "GET"
+            },
+            "argmap": ["url", "*"]
+        },
+        "get_json": {
+            "doc": "Make a JSON GET request",
+            "defaults": {
+                "method": "GET",
+                "headers": [
+                    ["Accept", "application/json"]
+                ]
             },
             "argmap": ["url", "*"]
         }
