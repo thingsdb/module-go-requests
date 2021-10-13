@@ -15,7 +15,7 @@ import (
 
 type reqData struct {
 	URL     string      `msgpack:"url"`
-	Method  string      `msgpack:"metohd"`
+	Method  string      `msgpack:"method"`
 	Body    []byte      `msgpack:"body"`
 	Headers [][2]string `msgpack:"headers"`
 	Params  [][2]string `msgpack:"params"`
