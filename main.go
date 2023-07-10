@@ -23,6 +23,7 @@ type reqData struct {
 
 type resData struct {
 	StatusCode int    `msgpack:"status_code"`
+	Status     string `msgpack:"status"`
 	Body       []byte `msgpack:"body"`
 }
 
@@ -86,7 +87,8 @@ func handleReqData(pkg *timod.Pkg, data *reqData) {
 		return
 	}
 
-	// Set the status code
+	// Set the status
+	response.Status = res.Status
 	response.StatusCode = res.StatusCode
 
 	timod.WriteResponse(pkg.Pid, &response)

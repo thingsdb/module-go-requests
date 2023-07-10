@@ -12,7 +12,7 @@ Install the module by running the following command in the `@thingsdb` scope:
 new_module('requests', 'github.com/thingsdb/module-go-requests');
 ```
 
-Optionally, you can choose a specific version by adding a `@` followed with the release tag. For example: `@v0.1.0`.
+Optionally, you can choose a specific version by adding a `@` followed with the release tag. For example: `@v0.1.1`.
 
 ## Configuration
 
@@ -25,6 +25,7 @@ Name                    | Description
 [get](#get)             | Make a GET request.
 [post](#post)           | Make a POST request.
 [post_json](#post_json) | Make a JSON POST request.
+[req](#req)             | Make a HTTP request.
 
 ### get
 
@@ -82,11 +83,22 @@ requests.post_json("https://reqbin.com/echo/post/json", json_dump(record)).then(
 });
 ```
 
+### req
+
+Syntax: `req(url, options)`
+
+A valid `method` is required.
+
+#### Arguments
+
+- `url`: The URL for the request.
+- `options`: Thing with [properties](#properties) for the request. At least a `method` is required.
+
 ## Properties
 
 Option    | Type  | Description
 --------- | ----- | -----------
-`method`  | str   | Method to use. For example `GET`, `POST`, `PUT` etc. (default: `GET`)
+`method`  | str   | Method to use. For example `GET`, `POST`, `PUT`, `PATCH` or `DELETE`.
 `url`     | str   | URL to use with the request.
 `body`    | bytes | Body to send with the request.
 `headers` | list  | Headers to send with the request. Must be a list with `[[Key, Value],..]` tuples.
