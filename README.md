@@ -12,7 +12,7 @@ Install the module by running the following command in the `@thingsdb` scope:
 new_module('requests', 'github.com/thingsdb/module-go-requests');
 ```
 
-Optionally, you can choose a specific version by adding a `@` followed with the release tag. For example: `@v0.1.1`.
+Optionally, you can choose a specific version by adding a `@` followed with the release tag. For example: `@v0.1.2`.
 
 ## Configuration
 
