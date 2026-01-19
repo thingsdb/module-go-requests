@@ -12,7 +12,7 @@ Install the module by running the following command in the `@thingsdb` scope:
 new_module('requests', 'github.com/thingsdb/module-go-requests');
 ```
 
-Optionally, you can choose a specific version by adding a `@` followed with the release tag. For example: `@v0.1.2`.
+Optionally, you can choose a specific version by adding a `@` followed with the release tag. For example: `@v0.1.3`.
 
 ## Configuration
 
@@ -96,10 +96,11 @@ A valid `method` is required.
 
 ## Properties
 
-Option    | Type  | Description
---------- | ----- | -----------
-`method`  | str   | Method to use. For example `GET`, `POST`, `PUT`, `PATCH` or `DELETE`.
-`url`     | str   | URL to use with the request.
-`body`    | bytes | Body to send with the request.
-`headers` | list  | Headers to send with the request. Must be a list with `[[Key, Value],..]` tuples.
-`params`  | list  | URL Params to send with the request. Must be a list with `[[Key, Value],..]` tuples.
+Option              | Type  | Description
+------------------- | ----- | -----------
+`method`            | str   | Method to use. For example `GET`, `POST`, `PUT`, `PATCH` or `DELETE`.
+`url`               | str   | URL to use with the request.
+`body`              | bytes | Body to send with the request.
+`headers`           | list  | Headers to send with the request. Must be a list with `[[Key, Value],..]` tuples.
+`allow_redirects`   | bool  | If `true`, 10 redirects are allowed.
+`params`            | list  | URL Params to send with the request. Must be a list with `[[Key, Value],..]` tuples.

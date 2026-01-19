@@ -14,11 +14,12 @@ import (
 )
 
 type reqData struct {
-	URL     string      `msgpack:"url"`
-	Method  string      `msgpack:"method"`
-	Body    []byte      `msgpack:"body"`
-	Headers [][2]string `msgpack:"headers"`
-	Params  [][2]string `msgpack:"params"`
+	URL            string      `msgpack:"url"`
+	Method         string      `msgpack:"method"`
+	Body           []byte      `msgpack:"body"`
+	Headers        [][2]string `msgpack:"headers"`
+	Params         [][2]string `msgpack:"params"`
+	AllowRedirects bool        `msgpack:"allow_redirects"`
 }
 
 type resData struct {
@@ -66,6 +67,14 @@ func handleReqData(pkg *timod.Pkg, data *reqData) {
 	}
 
 	client := &http.Client{}
+
+	// The default client policy is to allow up to 10 redirects
+	if !data.AllowRedirects {
+		client.CheckRedirect = func(req *http.Request, via []*http.Request) error {
+			return http.ErrUseLastResponse
+		}
+	}
+
 	res, err := client.Do(req)
 	if err != nil {
 		timod.WriteEx(
