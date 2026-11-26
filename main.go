@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -87,7 +87,7 @@ func handleReqData(pkg *timod.Pkg, data *reqData) {
 	var response resData
 
 	// Set the body
-	response.Body, err = ioutil.ReadAll(res.Body)
+	response.Body, err = io.ReadAll(res.Body)
 	if err != nil {
 		timod.WriteEx(
 			pkg.Pid,
