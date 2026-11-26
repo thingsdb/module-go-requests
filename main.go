@@ -9,7 +9,7 @@ import (
 	"net/url"
 	"time"
 
-	timod "github.com/thingsdb/go-timod"
+	timod "github.com/thingsdb/go-timod/v2"
 
 	"github.com/vmihailenco/msgpack"
 )
@@ -60,10 +60,8 @@ func handleReqData(pkg *timod.Pkg, data *reqData) {
 		return
 	}
 
-	for i := 0; i < len(data.Headers); i++ {
-		header := data.Headers[i]
-		key, value := header[0], header[1]
-		req.Header.Set(key, value)
+	for _, header := range data.Headers {
+		req.Header.Set(header[0], header[1])
 	}
 
 	client := &http.Client{}
