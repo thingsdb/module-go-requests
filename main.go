@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"time"
 
 	timod "github.com/thingsdb/go-timod"
 
@@ -14,12 +15,13 @@ import (
 )
 
 type reqData struct {
-	URL            string      `msgpack:"url"`
-	Method         string      `msgpack:"method"`
-	Body           []byte      `msgpack:"body"`
-	Headers        [][2]string `msgpack:"headers"`
-	Params         [][2]string `msgpack:"params"`
-	AllowRedirects bool        `msgpack:"allow_redirects"`
+	URL            string        `msgpack:"url"`
+	Method         string        `msgpack:"method"`
+	Body           []byte        `msgpack:"body"`
+	Headers        [][2]string   `msgpack:"headers"`
+	Params         [][2]string   `msgpack:"params"`
+	AllowRedirects bool          `msgpack:"allow_redirects"`
+	Timeout        time.Duration `msgpack:"timeout"`
 }
 
 type resData struct {
@@ -43,10 +45,8 @@ func handleReqData(pkg *timod.Pkg, data *reqData) {
 
 	body := bytes.NewReader(data.Body)
 
-	for i := 0; i < len(data.Params); i++ {
-		param := data.Params[i]
-		key, value := param[0], param[1]
-		params.Set(key, value)
+	for _, param := range data.Params {
+		params.Set(param[0], param[1])
 	}
 
 	reqURL.RawQuery = params.Encode()
@@ -67,6 +67,11 @@ func handleReqData(pkg *timod.Pkg, data *reqData) {
 	}
 
 	client := &http.Client{}
+	if data.Timeout > 0 && data.Timeout <= 60 {
+		client.Timeout = data.Timeout * time.Second
+	} else {
+		client.Timeout = 30 * time.Second
+	}
 
 	// The default client policy is to allow up to 10 redirects
 	if !data.AllowRedirects {
